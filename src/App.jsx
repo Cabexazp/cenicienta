@@ -5,12 +5,15 @@ import { Sparkles, Crown, Calendar, Clock, MapPin, Volume2, VolumeX, Mail, Messa
 function NeonGoldName({ text }) {
   return (
     <div className="relative inline-block p-3 sm:p-5 my-1 select-none w-full">
+      {/* Base de acrílico transparente con borde brillante */}
       <div 
         className="absolute inset-0 rounded-3xl bg-amber-200/10 backdrop-blur-[2px] border border-amber-300/30" 
         style={{
           boxShadow: '0 0 15px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.2)'
         }}
       />
+
+      {/* Texto de Neón Dorado con resplandor */}
       <h1 
         className="relative text-2xl sm:text-4xl md:text-5xl font-normal tracking-wide text-amber-100 break-words leading-tight"
         style={{
@@ -36,7 +39,9 @@ function MaskedHeading({ text }) {
     <div className="relative overflow-hidden inline-block py-1 my-1">
       <p 
         className="text-base sm:text-lg font-medium tracking-[0.35em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 animate-masked-reveal"
-        style={{ filter: 'drop-shadow(0 2px 8px rgba(245, 158, 11, 0.6))' }}
+        style={{
+          filter: 'drop-shadow(0 2px 8px rgba(245, 158, 11, 0.6))'
+        }}
       >
         {text}
       </p>
@@ -58,8 +63,12 @@ function MaskedHeading({ text }) {
           animation: maskedReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes breathing {
-          0%, 100% { transform: scale(1) translateY(0px); }
-          50% { transform: scale(1.04) translateY(-8px); }
+          0%, 100% {
+            transform: scale(1) translateY(0px);
+          }
+          50% {
+            transform: scale(1.04) translateY(-8px);
+          }
         }
         .animate-breath {
           animation: breathing 4.2s ease-in-out infinite;
@@ -73,7 +82,7 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Referencia para la etiqueta de audio
+  // Referencia para la etiqueta de audio MP3
   const audioRef = useRef(null);
 
   // Fecha del evento: 10 de Octubre de 2026
@@ -96,6 +105,7 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // Carga automática de la fuente tipográfica
   useEffect(() => {
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap';
@@ -133,6 +143,7 @@ export default function App() {
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+
       particles.forEach((p) => {
         p.y -= p.speedY;
         p.x += p.speedX;
@@ -167,7 +178,7 @@ export default function App() {
     };
   }, []);
 
-  // Función para encender o apagar la música
+  // Función para pausar / encender la música
   const toggleMusic = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -176,7 +187,7 @@ export default function App() {
       } else {
         audioRef.current.play().then(() => {
           setIsPlaying(true);
-        }).catch((err) => console.log("Error al reproducir audio:", err));
+        }).catch((err) => console.log("Error de audio:", err));
       }
     }
   };
@@ -186,7 +197,7 @@ export default function App() {
     if (audioRef.current && !isPlaying) {
       audioRef.current.play().then(() => {
         setIsPlaying(true);
-      }).catch((err) => console.log("Error al reproducir audio:", err));
+      }).catch((err) => console.log("Error de audio:", err));
     }
   };
 
@@ -198,8 +209,8 @@ export default function App() {
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden font-sans select-none bg-slate-950">
       
-      {/* Elemento de Audio MP3 oculto */}
-      <audio ref={audioRef} src="/musica.mp3" loop prefetch="auto" />
+      {/* Audio MP3 guardado en public/musica.mp3 */}
+      <audio ref={audioRef} src="/musica.mp3" loop preload="auto" />
 
       {/* Fondo de flores de jardín */}
       <div 
@@ -209,6 +220,7 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-slate-950/40" />
       </div>
 
+      {/* Capa de Partículas en Canvas */}
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-10" />
 
       {/* Botón de Música Flotante Azul Celeste */}
@@ -221,38 +233,51 @@ export default function App() {
       </button>
 
       {!isOpen ? (
-        /* PORTADA */
+        /* PORTADA AJUSTADA Y GRANDE PARA CELULAR */
         <div className="relative z-30 min-h-screen max-w-lg mx-auto flex flex-col justify-between items-center px-4 py-6">
+          
+          {/* Corona Superior */}
           <div className="pt-2 z-20">
             <div className="p-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-amber-300/40 shadow-[0_0_15px_rgba(251,191,36,0.3)] inline-block">
               <Crown className="w-8 h-8 text-amber-200 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]" />
             </div>
           </div>
 
-          <div className="relative w-full flex items-stretch justify-between my-auto py-2">
-            <div className="w-[58%] flex flex-col justify-center items-start text-left space-y-2 z-20">
-              <NeonGoldName text="Manuela Rengifo Quintero" />
-              <MaskedHeading text="Mis 15 Años" />
+          {/* ESTRUCTURA PRINCIPAL */}
+          <div className="relative w-full flex-1 flex items-center justify-between my-auto py-2 px-1 z-30">
+            
+            {/* Lado Izquierdo: Nombre, Subtítulo y Pase Personal */}
+            <div className="w-[55%] flex flex-col justify-center items-start text-left space-y-2 z-30 pl-1">
+              <div className="w-full transform scale-105 origin-left">
+                <NeonGoldName text="Manuela Rengifo Quintero" />
+              </div>
               
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-950/80 border border-sky-400/50 text-sky-200 text-xs font-medium shadow-[0_0_12px_rgba(56,189,248,0.25)] mt-2">
-                <UserCheck className="w-3.5 h-3.5 text-sky-300" />
+              <div className="pl-1">
+                <MaskedHeading text="Mis 15 Años" />
+              </div>
+              
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-950/80 border border-sky-400/50 text-sky-200 text-xs font-semibold shadow-[0_0_12px_rgba(56,189,248,0.25)] mt-2">
+                <UserCheck className="w-4 h-4 text-sky-300" />
                 <span>Pase Personal</span>
               </div>
             </div>
 
-            <div className="w-[92%] absolute -right-4 -top-8 -bottom-8 flex items-center justify-end z-40 pointer-events-none">
-              <div className="relative h-[135%] w-full flex items-center justify-center animate-breath">
-                <div className="absolute inset-0 bg-sky-400/25 rounded-full blur-2xl -z-10" />
+            {/* Lado Derecho: Princesa Flotante (z-40) - Imponente en la Pantalla */}
+            <div className="w-[55%] absolute -right-6 top-1/2 -translate-y-1/2 flex items-center justify-end z-40 pointer-events-none">
+              <div className="relative w-full h-[75vh] max-h-[580px] flex items-center justify-center animate-breath">
+                <div className="absolute inset-0 bg-sky-400/20 rounded-full blur-3xl -z-10" />
                 <img 
                   src="/princesa.png" 
                   alt="Princesa" 
-                  className="h-full max-h-[480px] object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]"
+                  className="h-full w-auto object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.7)] scale-110 origin-bottom"
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
               </div>
             </div>
+
           </div>
 
+          {/* Botón Abrir Invitación */}
           <button
             onClick={handleOpenInvitation}
             className="relative z-30 w-full py-4 rounded-full bg-gradient-to-r from-sky-400 via-cyan-500 to-sky-600 text-slate-950 font-bold text-lg shadow-[0_0_25px_rgba(56,189,248,0.5)] border border-sky-200/60 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 mt-4"
@@ -262,8 +287,9 @@ export default function App() {
           </button>
         </div>
       ) : (
-        /* CONTENIDO DE LA INVITACIÓN */
+        /* CONTENIDO INTERIOR DE LA INVITACIÓN */
         <main className="relative z-30 max-w-md mx-auto px-5 py-10 space-y-6 text-center">
+          
           <header className="space-y-2 bg-slate-900/60 backdrop-blur-md p-6 rounded-3xl border border-sky-400/30 shadow-2xl">
             <h1 className="text-3xl font-serif font-bold text-amber-200 drop-shadow-[0_0_12px_rgba(245,158,11,0.6)]">
               Manuela Rengifo Quintero
@@ -278,6 +304,7 @@ export default function App() {
             </div>
           </header>
 
+          {/* Cuenta Regresiva */}
           <section className="bg-slate-900/60 backdrop-blur-md border border-sky-400/30 rounded-3xl p-5 shadow-2xl">
             <div className="flex items-center justify-center gap-2 text-sky-300 font-serif font-semibold mb-3 text-xs tracking-wider uppercase">
               <Clock className="w-4 h-4" />
@@ -298,6 +325,7 @@ export default function App() {
             </div>
           </section>
 
+          {/* Detalles del Evento */}
           <section className="space-y-4 text-left">
             <div className="bg-slate-900/60 backdrop-blur-md border border-sky-400/30 rounded-3xl p-5 shadow-xl">
               <div className="flex items-start gap-3">
@@ -332,6 +360,7 @@ export default function App() {
               </div>
             </div>
 
+            {/* Lluvia de Sobres */}
             <div className="bg-slate-900/60 backdrop-blur-md border border-sky-400/30 rounded-3xl p-5 shadow-xl text-center">
               <Mail className="w-6 h-6 text-sky-300 mx-auto mb-1" />
               <h2 className="text-base font-serif font-bold text-amber-200 uppercase tracking-wider">Lluvia de Sobres</h2>
@@ -341,6 +370,7 @@ export default function App() {
             </div>
           </section>
 
+          {/* Confirmar por WhatsApp */}
           <button
             onClick={handleWhatsappRsvp}
             className="w-full py-4 rounded-full bg-gradient-to-r from-sky-400 via-cyan-500 to-sky-600 text-slate-950 font-bold text-base shadow-[0_0_25px_rgba(56,189,248,0.4)] border border-sky-200/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2"
