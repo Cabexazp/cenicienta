@@ -263,17 +263,18 @@ export default function App() {
             </div>
 
             {/* Lado Derecho: Princesa Flotante (z-40) - Imponente en la Pantalla */}
-            <div className="w-[55%] absolute -right-6 top-1/2 -translate-y-1/2 flex items-center justify-end z-40 pointer-events-none">
-              <div className="relative w-full h-[75vh] max-h-[580px] flex items-center justify-center animate-breath">
-                <div className="absolute inset-0 bg-sky-400/20 rounded-full blur-3xl -z-10" />
-                <img 
-                  src="/princesa.png" 
-                  alt="Princesa" 
-                  className="h-full w-auto object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.7)] scale-110 origin-bottom"
-                  onError={(e) => { e.target.style.display = 'none'; }}
-                />
-              </div>
-            </div>
+          <div className="absolute right-[-15%] sm:right-[-10%] top-1/2 -translate-y-1/2 z-40 pointer-events-none flex items-center justify-end">
+  <div className="relative h-[85vh] max-h-[400px] w-auto flex items-center justify-center animate-breath">
+    {/* Resplandor celeste posterior */}
+    <div className="absolute inset-0 bg-sky-400/25 rounded-full blur-3xl -z-10 scale-90" />
+    <img 
+      src="/princesa.png" 
+      alt="Princesa" 
+      className="h-full w-auto max-w-none object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] scale-125 origin-bottom"
+      onError={(e) => { e.target.style.display = 'none'; }}
+    />
+  </div>
+</div>
 
           </div>
 
