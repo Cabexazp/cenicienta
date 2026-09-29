@@ -313,7 +313,7 @@ export default function App() {
             </div>
 
             <div className="absolute right-[-15%] sm:right-[-10%] top-1/2 -translate-y-1/2 z-40 pointer-events-none flex items-center justify-end">
-              <div className="relative h-[85vh] max-h-[450px] w-auto flex items-center justify-center animate-breath">
+              <div className="relative h-[85vh] max-h-[500px] w-auto flex items-center justify-center animate-breath">
                 <div className="absolute inset-0 bg-sky-400/25 rounded-full blur-3xl -z-10 scale-90" />
                 <img 
                   src="/princesa.png" 
